@@ -225,8 +225,14 @@ namespace Template10.Services.NavigationService
                 {
                     return false;
                 }
+                
+                var currentPageType = Type.GetType(state["CurrentPageType"].ToString());
+                if (currentPageType == null)
+                {
+                    return false;
+                }
 
-                FrameFacade.CurrentPageType = Type.GetType(state["CurrentPageType"].ToString());
+                FrameFacade.CurrentPageType = currentPageType;
                 FrameFacade.CurrentPageParam = state["CurrentPageParam"];
                 FrameFacade.SetNavigationState(state["NavigateState"].ToString());
                 NavigateTo(NavigationMode.Refresh, FrameFacade.CurrentPageParam);
